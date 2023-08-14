@@ -135,7 +135,7 @@ The static analysis could influence both reachability analysis and precondition 
 Moreover, we noticed that with better static reachability analysis, e.g., an upgraded version of SVF with a higher LLVM version, the results can improved with minor analysis overhead. You can also try our [script](scripts/icfg_index.py) for reachability analysis based on the dot files exported by any version of SVF, which could have better precision, which is used in the evaluation for the paper. We are also looking forward to any optimized static analysis techniques proposed to improve Beacon! Drop me an email (hhuangaz at cse dot ust dot hk) if you have any thoughts or ideas ~ 
 
 ## 2. Supporting other fuzzers   
-Our prototype can generate the target binary that can be directly used for other AFL-based fuzzers as the paper said. The prototype in Dockerhub is an unique version for our environment, which **does not** work with other fuzzers. For general purpose, you should **use our released code** to generate the binary for other AFL-based fuzzers.
+Our prototype can generate the target binary that can be directly used for other AFL-based fuzzers as the paper said. The prototype in Dockerhub is an unique version for our environment, which **does not** work with other fuzzers. For general purpose, you should **use our released code** to generate the binary for other AFL-based fuzzers. You can also modify the instrumentation code to support your own features. In this case, please use your own ``afl-llvm-rt.o`` as well.
 
 We find there are some compatibility issues to generate a whole bc to analyze when serving for Libfuzzer-based fuzzers with an additional afldriver.cpp. If you are willing to help, please let me know through email (hhuangaz at cse dot ust dot hk).
 
