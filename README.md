@@ -39,7 +39,7 @@ sed -i 's/LLVMRELEASE=\/home\/ysui\/llvm-4.0.0\/llvm-4.0.0.obj/LLVMRELEASE=\/usr
 ./build.sh
 popd
 ```
-### 2.2.2 Build precondInfer
+### 2.2.2 Build Precondition Inference Engine (precondInfer)
 ```
 pushd precondInfer
 mkdir build
@@ -53,7 +53,7 @@ cmake \
 	..
 make -j
 ```
-### 2.2.3 Build Ins
+### 2.2.3 Build Instrumentation Engine (Ins)
 ```
 pushd Ins
 mkdir build
@@ -108,10 +108,10 @@ The instrumentation tool will take the above three files and output an instrumen
 
 In this example:
 - **output** is the output location for the instrumented bc files. E.g., `swftophp-2017-7578.bc` is the instrumented bitcode file for the target project.
-- **blocks** receives the lists of the reachable blocks from a file. E.g., `bbreaches.txt` is the reachable blocks inferred from the previous analysis.
+- **blocks** receives the lists of the reachable blocks from a file. E.g., `bbreaches.txt` is reachable blocks inferred from the previous analysis. The form could vary based on byte code or source code.
 - **load** receives the lists of the preconditions from a file. E.g., `range_res.txt` is the preconditions inferred from the previous analysis.
 - **afl** enable the instrumentation for AFL coverage tracing.
-- `transed.bc` is the _transfromed_ bc from previous analysis.
+- `transed.bc` is the _transfromed_ bc from the previous analysis.
 
 ### 2.3.4 Compilation
 Since we have the bc with the infeasible path pruned, we need to compile the bc into an executable binary.
@@ -130,12 +130,12 @@ Alternatively, you could use [docker image](https://hub.docker.com/r/yguoaz/beac
 # 4. FAQ
 
 ## 1. The precision of the static analysis  
-The static analysis could influence both reachability analysis and precondition inference to prune infeasible paths, especially for handling indirect calls. The released prototype utilizes a flow-sensitive Anderson pointer analysis. The reachability results can be varied with different pointer analyses and influence the performance of Beacon. We have encountered the issue of AFL reporting `no instrumentation`. In this case, please do not use the parameter “-block” in this case during the instrumentation stage.
+The static analysis could influence both reachability analysis and precondition inference to prune infeasible paths, especially for handling indirect calls. The released prototype utilizes a flow-sensitive Anderson pointer analysis. The reachability results can be varied with different pointer analyses and influence the performance of Beacon. We have encountered the issue of AFL reporting `no instrumentation`. In this case, one of the straightforward solutions is to not use the parameter “-block” in this case during the instrumentation stage.
 
 Moreover, we noticed that with better static reachability analysis, e.g., an upgraded version of SVF with a higher LLVM version, the results can improved with minor analysis overhead. You can also try our [script](scripts/icfg_index.py) for reachability analysis based on the dot files exported by any version of SVF, which could have better precision, which is used in the evaluation for the paper. We are also looking forward to any optimized static analysis techniques proposed to improve Beacon! Drop me an email (hhuangaz at cse dot ust dot hk) if you have any thoughts or ideas ~ 
 
 ## 2. Supporting other fuzzers   
-Our prototype can generate the target binary that can be directly used for other AFL-based fuzzers as the paper said. The prototype in Dockerhub is an unique version for our environment, which **does not** work with other fuzzers. For general purpose, you should **use our released code** to generate the binary for other AFL-based fuzzers. You can also modify the instrumentation code to support your own features. In this case, please use your own ``afl-llvm-rt.o`` as well.
+Our prototype can generate the target binary that can be directly used for other AFL-based fuzzers as the paper said. The prototype in Dockerhub is a unique version of our environment, which **does not** work with other fuzzers. For general purposes, you should **use our released code** to generate the binary for other AFL-based fuzzers. You can also modify the instrumentation code to support your own features. In this case, please use your own ``afl-llvm-rt.o`` as well.
 
 We find there are some compatibility issues to generate a whole bc to analyze when serving for Libfuzzer-based fuzzers with an additional afldriver.cpp. If you are willing to help, please let me know through email (hhuangaz at cse dot ust dot hk).
 
