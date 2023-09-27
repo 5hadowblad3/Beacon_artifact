@@ -111,6 +111,12 @@ namespace {
             cl::init(false)
             );
 
+    cl::opt<bool> Byte(
+            "byte",
+            cl::desc("Use LLVM byte code location for indexing"),
+            cl::init(false)
+            );
+
     cl::opt<bool> Profile(
             "feedback",
             cl::desc("Inst feedback for fuzzer"),
