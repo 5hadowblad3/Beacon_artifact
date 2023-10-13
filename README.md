@@ -129,7 +129,7 @@ Alternatively, you could use [docker image](https://hub.docker.com/r/yguoaz/beac
 
 # 4. FAQ
 
-## 1. The precision of the static analysis  
+## 1. The precision of the static analysis (Help wanted) 
 The static analysis could influence both reachability analysis and precondition inference to prune infeasible paths, especially for handling indirect calls. The released prototype utilizes a flow-sensitive Anderson pointer analysis. The reachability results can be varied with different pointer analyses and influence the performance of Beacon. 
 Moreover, we noticed that with better static reachability analysis, e.g., an upgraded version of SVF with a higher LLVM version, the results can improved with minor analysis overhead. You can also try our [script](scripts/icfg_index.py) for reachability analysis based on the dot files exported by any version of SVF, which could have better precision, which is used in the evaluation for the paper. We are also looking forward to any optimized static analysis techniques proposed to improve Beacon! Drop me an email (hhuangaz at cse dot ust dot hk) if you have any thoughts or ideas ~ 
 
