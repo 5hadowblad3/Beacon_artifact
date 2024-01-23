@@ -228,7 +228,11 @@ void WPInferenceInterface::runForTarget(const Instruction *target, bool useSolve
   };
 
   PreconditionFixpo fixpo(target, *icfg, isInterAnalysis);
-  fixpo.init();
+  if (!fixpo.init()) {
+    llvm::errs() << "Target function is unreachable: " << target->getFunction()->getName() << "\n";
+    return;
+  }
+
   fixpo.run();
 
   std::unordered_map<const llvm::Function*, PreconditionFixpo::FixpointDisjunctiveResult> analysisRes = fixpo.getAnalysisResult();

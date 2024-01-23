@@ -260,12 +260,19 @@ unsigned PreconditionFixpo::getWidthForType(llvm::Type *ty) const {
   return DL->getTypeSizeInBits(ty);
 }
 
-void PreconditionFixpo::init() {
+bool PreconditionFixpo::init() {
   trackSymbol();
+
+  if (valSym.empty()) {
+    return false;
+  }
+
   initSyms();
 
   pushProcessList(ProcessItem(targetNode, getTrueCond()));
   addPostCond(targetNode, getTrueCond());
+
+  return true;
 }
 
 SymExpr PreconditionFixpo::getTrueCond() const {
@@ -319,7 +326,6 @@ void PreconditionFixpo::trackSymbolForInst(const Instruction &inst) {
 
     return;
   }
-
 
   bool tracked = false;
   if (inst.getType()->isIntegerTy()) {

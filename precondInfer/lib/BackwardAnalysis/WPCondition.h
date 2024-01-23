@@ -46,7 +46,7 @@ namespace BackwardAI {
     PreconditionFixpo(const llvm::Instruction *target,
                       const ICFG &icfg,
                       bool interAnalysis);
-    void init();
+    bool init();
     void run();
 
     class FixpointDisjunctiveResult {
