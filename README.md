@@ -1,7 +1,9 @@
 # 1. Introduction
 This directory provides the source code of the paper: "BEACON: Directed Grey-Box Fuzzing with Provable Path Pruning"[[S&P 2022](https://ieeexplore.ieee.org/document/9833751)].
 
-# 2. Run Beacon
+# 2. Run Beacon 
+Tested environment: Ubuntu 16 and 18
+
 ## 2.1 Environment Prerequisite
 ### 2.1.1 Set Environment Variable
 ```export BEACON=<path_of_beacon_repository>```
@@ -14,7 +16,7 @@ apt-get install -y make build-essential git wget cmake gawk libtinfo-dev libcap-
 # llvm-4.0
 apt-get install -y libtinfo5
 apt-get install -y xz-utils
-wget -q https://releases.llvm.org/4.0.0/clang+llvm-4.0.0-x86_64-linux-gnu-ubuntu-16.10.tar.xz
+wget -q https://releases.llvm.org/4.0.0/clang+llvm-4.0.0-x86_64-linux-gnu-ubuntu-16.10.tar.xz 
 tar -xf clang+llvm-4.0.0-x86_64-linux-gnu-ubuntu-16.10.tar.xz
 rm clang+llvm-4.0.0-x86_64-linux-gnu-ubuntu-16.10.tar.xz
 cp -r clang+llvm-4.0.0-x86_64-linux-gnu-ubuntu-16.10 /usr/llvm
