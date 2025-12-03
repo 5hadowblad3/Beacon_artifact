@@ -129,7 +129,7 @@ You could run `$BEACON/scripts/run.sh` to fuzz the test binary.
 ```$BEACON/Fuzzer/afl-fuzz -i $BEACON/Test/fuzz_in -o $BEACON/Outputs/fuzz_out -m none -t 9999 -- $BEACON/Outputs/CVE-2017-7578 @@```
 
 # 3. Docker Images
-Alternatively, you could use [docker image](https://hub.docker.com/r/yguoaz/beacon) (Beacon binary without source code)
+Alternatively, you could use [docker image](https://hub.docker.com/r/yguoaz/beacon) (Beacon binary without source code). However, this version is only for a demo with some potential bug. Please refer to the newest code in this repo for more rigor evaluation or adaption.
 
 # 4. FAQ
 
